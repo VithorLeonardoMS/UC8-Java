@@ -19,6 +19,11 @@ public class Vestimenta extends Produto{
     
     @Override
     public String getProduto(){
-        return "";
+        return "    Nome: " +nome+"| Preco: "+ preco+ "| Quantidade: " + quantidade + "| Tamanho: " + tamanho;
+    }
+    
+    @Override
+    public Produto clone(){
+        return new Vestimenta(nome,preco,quantidade,tamanho);
     }
 }

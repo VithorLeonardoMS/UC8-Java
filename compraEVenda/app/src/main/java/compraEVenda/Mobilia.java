@@ -10,14 +10,17 @@ package compraEVenda;
  */
 public class Mobilia extends Produto{
     
-    
-    
     public Mobilia(String name, float price, int quantity){
         super(name, price, quantity);
     }
     
     @Override
     public String getProduto(){
-        return "";
+        return "    Nome: " +nome+"| Preco: "+ preco+ "| Quantidade: " + quantidade;
+    }
+    
+    @Override
+    public Produto clone(){
+        return new Mobilia(nome,preco,quantidade);
     }
 }

@@ -16,6 +16,11 @@ public class Eletronico extends Produto{
     
     @Override
     public String getProduto(){
-        return "";
+        return "    Nome: " +nome+"| Preco: "+ preco+ "| Quantidade: " + quantidade;
+    }
+    
+    @Override
+    public Produto clone(){
+        return new Eletronico(nome,preco,quantidade);
     }
 }

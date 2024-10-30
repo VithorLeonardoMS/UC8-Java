@@ -22,17 +22,33 @@ public abstract class Produto {
     
     public boolean temDinheiro(int quantity, float money){
         boolean retorno = true;
-        if(quantity > 0 && quantity <= quantidade){
-
+        if(quantity <= 0 && quantity >= quantidade){
             retorno = false;
-        } else{
-        if(quantity * money > preco * quantidade){
+        } else if ((quantity * preco) > money){
             retorno = false;
+        }
+        return retorno;
+    }
+    
+    public int compraMaxima(float dinheiro){
+        int retorno = 0;
+        boolean verificacao = true;
+        while( verificacao){
+            if((retorno+1) * preco <= dinheiro){
+                retorno++;
+            } else{
+                verificacao = false;
             }
         }
         return retorno;
     }
     
+    public float precoTotal(){
+        return preco * quantidade;
+    }
+    
     public abstract String getProduto();
+    
+    public abstract Produto clone();
     
 }

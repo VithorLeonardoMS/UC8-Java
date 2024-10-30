@@ -19,6 +19,11 @@ public class Limpeza extends Produto{
     
     @Override
     public String getProduto(){
-        return "";
+        return "    Nome: " +nome+"| Preco: "+ preco+ "| Quantidade: " + quantidade + "| Validade: "+validade;
+    }
+    
+    @Override
+    public Produto clone(){
+        return new Limpeza(nome,preco,quantidade,validade);
     }
 }
