@@ -69,7 +69,7 @@ public class AreaCompras {
                     
                     int indiceEscolhido = sc.nextInt();
                     
-                    if (indiceEscolhido < 0 && indiceEscolhido >= carrinho.size()) {
+                    if (indiceEscolhido < 0 && indiceEscolhido >= produtos.size()) {
                         System.out.println("Indice invalido");
                     } else {
                         System.out.println(carrinho.get(indiceEscolhido).nome + " removido com sucesso");
@@ -97,6 +97,8 @@ public class AreaCompras {
                        System.out.println("Compra realizada com sucesso!");
                     }
                     break;
+                default:
+                  System.out.println("Opcao invalida");  
             }
         }
 
