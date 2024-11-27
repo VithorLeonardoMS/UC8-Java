@@ -34,18 +34,13 @@ public class anoes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tipoJardim = new javax.swing.JToggleButton();
-        tipoMitico = new javax.swing.JToggleButton();
         tipoReal = new javax.swing.JToggleButton();
-        pesoMagro = new javax.swing.JToggleButton();
         pesoMedio = new javax.swing.JToggleButton();
         pesoForte = new javax.swing.JToggleButton();
         corBranco = new javax.swing.JToggleButton();
         corNegro = new javax.swing.JToggleButton();
-        corColorido = new javax.swing.JToggleButton();
-        idadeBebe = new javax.swing.JToggleButton();
         idadeJovem = new javax.swing.JToggleButton();
         idadeVelho = new javax.swing.JToggleButton();
-        humorTriste = new javax.swing.JToggleButton();
         humorFeliz = new javax.swing.JToggleButton();
         humorBrabo = new javax.swing.JToggleButton();
 
@@ -71,13 +66,6 @@ public class anoes extends javax.swing.JFrame {
             }
         });
 
-        tipoMitico.setText("Mitico");
-        tipoMitico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoMiticoActionPerformed(evt);
-            }
-        });
-
         tipoReal.setText("Real");
         tipoReal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,13 +73,28 @@ public class anoes extends javax.swing.JFrame {
             }
         });
 
-        pesoMagro.setText("Desnutrido");
-
+        pesoMedio.setSelected(true);
         pesoMedio.setText("Normal");
+        pesoMedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesoMedioActionPerformed(evt);
+            }
+        });
 
         pesoForte.setText("No meu nível");
+        pesoForte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesoForteActionPerformed(evt);
+            }
+        });
 
+        corBranco.setSelected(true);
         corBranco.setText("Normal");
+        corBranco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                corBrancoActionPerformed(evt);
+            }
+        });
 
         corNegro.setText("negro");
         corNegro.addActionListener(new java.awt.event.ActionListener() {
@@ -100,19 +103,35 @@ public class anoes extends javax.swing.JFrame {
             }
         });
 
-        corColorido.setText("Lgbt");
-
-        idadeBebe.setText("Bebê");
-
+        idadeJovem.setSelected(true);
         idadeJovem.setText("Jovem");
+        idadeJovem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idadeJovemActionPerformed(evt);
+            }
+        });
 
         idadeVelho.setText("Velho");
+        idadeVelho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idadeVelhoActionPerformed(evt);
+            }
+        });
 
-        humorTriste.setText("Triste");
-
+        humorFeliz.setSelected(true);
         humorFeliz.setText("Feliz");
+        humorFeliz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                humorFelizActionPerformed(evt);
+            }
+        });
 
         humorBrabo.setText("Raivoso");
+        humorBrabo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                humorBraboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,95 +141,69 @@ public class anoes extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(idadeBebe)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(idadeJovem)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(idadeVelho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(corBranco)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(corNegro)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(corColorido))))
-                        .addContainerGap(546, Short.MAX_VALUE))
+                        .addComponent(corBranco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(corNegro))
+                    .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(humorTriste)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(humorFeliz)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(humorBrabo))
-                            .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(idadeJovem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idadeVelho, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(pesoMagro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pesoMedio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pesoForte))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tipoJardim)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tipoMitico)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tipoReal)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(imageAnao, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addComponent(humorFeliz)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(humorBrabo))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(pesoMedio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pesoForte))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tipoJardim)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tipoReal)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imageAnao, javax.swing.GroupLayout.PREFERRED_SIZE, 1345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tipoJardim)
-                            .addComponent(tipoMitico)
-                            .addComponent(tipoReal))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pesoMagro)
-                            .addComponent(pesoMedio)
-                            .addComponent(pesoForte))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5))
-                    .addComponent(imageAnao, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(377, 377, 377)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipoJardim)
+                    .addComponent(tipoReal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pesoMedio)
+                    .addComponent(pesoForte))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(corBranco)
-                    .addComponent(corNegro)
-                    .addComponent(corColorido))
+                    .addComponent(corNegro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idadeBebe)
                     .addComponent(idadeJovem)
                     .addComponent(idadeVelho))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(humorTriste)
                     .addComponent(humorFeliz)
                     .addComponent(humorBrabo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(imageAnao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,11 +229,30 @@ public class anoes extends javax.swing.JFrame {
         String imageS = "anao";//String de escolhera a imagem selecionada
         if(tipoJardim.isSelected()){
             imageS += "Jardim";
-        } else if(tipoMitico.isSelected()){
-           imageS += "Mitico";
         } else{
             imageS += "Real";
         }
+        if(pesoMedio.isSelected()){
+            imageS += "Medio";
+        } else{
+            imageS += "Forte";
+        }
+        if(corBranco.isSelected()){
+            imageS += "Branco";
+        } else{
+            imageS += "Negro";
+        }
+        if(idadeJovem.isSelected()){
+            imageS += "Jovem";
+        } else {
+            imageS += "Velho";
+        }
+        if(humorFeliz.isSelected()){
+            imageS += "Feliz";
+        } else{
+            imageS += "Bravo";
+        }
+        
         imageS += ".jpg";
         
         System.out.println(imageS);
@@ -249,25 +261,53 @@ public class anoes extends javax.swing.JFrame {
     }
     private void tipoRealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoRealActionPerformed
         tipoJardim.setSelected(false);
-        tipoMitico.setSelected(false);
         trocarImagem();
     }//GEN-LAST:event_tipoRealActionPerformed
 
-    private void corNegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNegroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_corNegroActionPerformed
-
     private void tipoJardimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoJardimActionPerformed
         tipoReal.setSelected(false);
-        tipoMitico.setSelected(false);
         trocarImagem();
     }//GEN-LAST:event_tipoJardimActionPerformed
 
-    private void tipoMiticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoMiticoActionPerformed
-        tipoJardim.setSelected(false);
-        tipoReal.setSelected(false);
+    private void pesoMedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoMedioActionPerformed
+        pesoForte.setSelected(false);
         trocarImagem();
-    }//GEN-LAST:event_tipoMiticoActionPerformed
+    }//GEN-LAST:event_pesoMedioActionPerformed
+
+    private void pesoForteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoForteActionPerformed
+        pesoMedio.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_pesoForteActionPerformed
+
+    private void corBrancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corBrancoActionPerformed
+        corNegro.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_corBrancoActionPerformed
+
+    private void corNegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corNegroActionPerformed
+        corBranco.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_corNegroActionPerformed
+
+    private void idadeJovemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idadeJovemActionPerformed
+        idadeVelho.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_idadeJovemActionPerformed
+
+    private void idadeVelhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idadeVelhoActionPerformed
+        idadeJovem.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_idadeVelhoActionPerformed
+
+    private void humorFelizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_humorFelizActionPerformed
+        humorBrabo.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_humorFelizActionPerformed
+
+    private void humorBraboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_humorBraboActionPerformed
+        humorFeliz.setSelected(false);
+        trocarImagem();
+    }//GEN-LAST:event_humorBraboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,12 +346,9 @@ public class anoes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton corBranco;
-    private javax.swing.JToggleButton corColorido;
     private javax.swing.JToggleButton corNegro;
     private javax.swing.JToggleButton humorBrabo;
     private javax.swing.JToggleButton humorFeliz;
-    private javax.swing.JToggleButton humorTriste;
-    private javax.swing.JToggleButton idadeBebe;
     private javax.swing.JToggleButton idadeJovem;
     private javax.swing.JToggleButton idadeVelho;
     private javax.swing.JLabel imageAnao;
@@ -322,10 +359,8 @@ public class anoes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton pesoForte;
-    private javax.swing.JToggleButton pesoMagro;
     private javax.swing.JToggleButton pesoMedio;
     private javax.swing.JToggleButton tipoJardim;
-    private javax.swing.JToggleButton tipoMitico;
     private javax.swing.JToggleButton tipoReal;
     // End of variables declaration//GEN-END:variables
 }
