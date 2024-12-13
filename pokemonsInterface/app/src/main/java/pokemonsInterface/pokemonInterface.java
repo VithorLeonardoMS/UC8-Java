@@ -5,36 +5,26 @@
 package pokemonsInterface;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 /**
  *
  * @author VITHORLEONARDOMELLOS
  */
 public class pokemonInterface extends javax.swing.JFrame {
 
-    ArrayList<Pokemon> estoque = new ArrayList<>();
-    ArrayList<Pokemon> mochila = new ArrayList<>();
+    private ArrayList<Pokemon> estoque = new ArrayList<>();
+    private ArrayList<Pokemon> mochila = new ArrayList<>();
+    
+    private DefaultListModel<String> listModelMochila = new DefaultListModel<>();
     
         
     /**
      * Creates new form pokemonInterface
      */
-    public pokemonInterface() {
-        estoque.add(new Pokemon("Pikachu", "Elétrico", 1, "pikachu.png"));
-        estoque.add(new Pokemon("Charizard", "Fogo/Voador", 1, "charizard.png"));
-        estoque.add(new Pokemon("Gengar", "Fantasma/Veneno", 1, "gengar.png"));
-        estoque.add(new Pokemon("Snorlax", "Normal", 1, "snorlax.png"));
-        estoque.add(new Pokemon("Lucario", "Lutador/Metálico", 1, "lucario.png"));
-        estoque.add(new Pokemon("Eevee", "Normal", 1, "eevee.png"));
-        estoque.add(new Pokemon("Gyarados", "Água/Voador", 1, "gyarados.png"));
-        estoque.add(new Pokemon("Alakazam", "Psíquico", 1, "alakazam.png"));
-        estoque.add(new Pokemon("Machamp", "Lutador", 1, "machamp.png"));
-        estoque.add(new Pokemon("Bulbasaur", "Planta/Veneno", 1, "bulbasaur.png"));
-        estoque.add(new Pokemon("Jigglypuff", "Normal/Fada", 1, "jigglypuff.png"));
-        estoque.add(new Pokemon("Arcanine", "Fogo", 1, "arcanine.png"));
-        initComponents();
-        
-        
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,9 +167,9 @@ public class pokemonInterface extends javax.swing.JFrame {
                             .addComponent(botaoVerShreck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(botaoTrocar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botaoRemover)
-                            .addComponent(botaoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botaoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botaoRemover)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,30 +180,75 @@ public class pokemonInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddActionPerformed
-        ArrayList<String> itensList = new ArrayList<>();
+    public pokemonInterface() {
+        initComponents();
+
+        listMochila.setModel(listModelMochila);
         
-        for(int i = 0; i < estoque.size() ; i++){
-            if(estoque.get(i).getPokemonSimples().equals(listEstoque.getSelectedValue())){
-                if(mochila.size() < 6){
-                    mochila.add(estoque.get(i));
+        estoque.add(new Pokemon("Pikachu", "Elétrico", 1, "pikachu.png"));
+        estoque.add(new Pokemon("Charizard", "Fogo/Voador", 1, "charizard.png"));
+        estoque.add(new Pokemon("Gengar", "Fantasma/Veneno", 1, "gengar.png"));
+        estoque.add(new Pokemon("Snorlax", "Normal", 1, "snorlax.png"));
+        estoque.add(new Pokemon("Lucario", "Lutador/Metálico", 1, "lucario.png"));
+        estoque.add(new Pokemon("Eevee", "Normal", 1, "eevee.png"));
+        estoque.add(new Pokemon("Gyarados", "Água/Voador", 1, "gyarados.png"));
+        estoque.add(new Pokemon("Alakazam", "Psíquico", 1, "alakazam.png"));
+        estoque.add(new Pokemon("Machamp", "Lutador", 1, "machamp.png"));
+        estoque.add(new Pokemon("Bulbasaur", "Planta/Veneno", 1, "bulbasaur.png"));
+        estoque.add(new Pokemon("Jigglypuff", "Normal/Fada", 1, "jigglypuff.png"));
+        estoque.add(new Pokemon("Arcanine", "Fogo", 1, "arcanine.png"));
+        
+        // Adicionar um listener para detectar seleções
+        listEstoque.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Evitar que o evento seja disparado duas vezes (quando a seleção muda)
+                if (!e.getValueIsAdjusting()) {
+                    // Obter o item selecionado
+                    String itemSelecionado = listEstoque.getSelectedValue();
+                    if (itemSelecionado != null) {
+                         for(int i = 0; i < estoque.size() ; i++){
+                            if(estoque.get(i).getPokemonSimples().equals(itemSelecionado)){
+                                imagemPrincipal.setIcon(new ImageIcon(getClass().getResource(estoque.get(i).imagem)));
+                                
+                                }   
+                            }
+                        }
+                    }
                 }
+        });
+    }
+    
+    private void atualizarMochila(){
+        
+    }
+    
+
+    
+    private void botaoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddActionPerformed
+            for(int i = 0; i < estoque.size() ; i++){
+                if(estoque.get(i).getPokemonSimples().equals(listEstoque.getSelectedValue())){
+                    if(mochila.size() < 6){
+                        mochila.add(estoque.get(i));
+                        listModelMochila.addElement(estoque.get(i).getPokemon());
+                    }
+                
+                }       
             }
-            itensList.add(estoque.get(i).getPokemon());
-        }
-        //Pesquisa no chat gpt, basicamente transforma uma arrayList em array normal, retornando os itens como String
-        String[] itens = itensList.toArray(new String[0]);
-        //Atualizando os valores na Jlist
-        listMochila = new javax.swing.JList<>(itens);
     }//GEN-LAST:event_botaoAddActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        
+        for(int i = 0; i < mochila.size(); i++){
+            if(mochila.get(i).getPokemon().equals(listMochila.getSelectedValue())){
+                listModelMochila.remove(i);
+                mochila.remove(i);
+            }
+        }
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
     private void botaoVerShreckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerShreckActionPerformed
-        ImageIcon imagemAnao = new ImageIcon(getClass().getResource("shrek.jpg"));
-        imagemPrincipal.setIcon(imagemAnao);
+        ImageIcon imagemSherk = new ImageIcon(getClass().getResource("shrek.jpg"));
+        imagemPrincipal.setIcon(imagemSherk);
     }//GEN-LAST:event_botaoVerShreckActionPerformed
 
     /**
