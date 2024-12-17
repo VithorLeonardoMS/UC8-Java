@@ -12,7 +12,7 @@ import java.sql.Statement;
  * @author VITHORLEONARDOMELLOS
  */
 public class CriarTabela {
-    public static void criarTabelaUsusarios(Connection conexao){
+    public static void criarTabelaUsuarios(Connection conexao){
         String sql = "CREATE TABLE IF NOT EXISTS usuarios ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "nome TEXT NOT NULL,"

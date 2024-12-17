@@ -12,7 +12,7 @@ public class App {
         Connection conexao = conexaoSQLite.conectar();
         
         if(conexao != null){
-            CriarTabela.criarTabelaUsusarios(conexao);
+            CriarTabela.criarTabelaUsuarios(conexao);
             
             InserirUsuario.inserirUsuario(conexao,"João", "joao@gmail.com");
             InserirUsuario.inserirUsuario(conexao,"Vithor", "vithor@gmail.com");

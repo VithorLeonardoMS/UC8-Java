@@ -19,11 +19,10 @@ public class ConexaoSQLite {
         
         try {
             conexao = DriverManager.getConnection(url);
-            System.out.println("Conexao com SQLite estabelecida");
+            System.out.println("Conexao com SQLite estabelecida!");
         } catch(SQLException e){
-            System.out.println("Erro ao connectar ao banco: " + e.getMessage());
+            System.out.println("Erro ao conectar ao banco: " + e.getMessage());
         }
-        
         return conexao;
     }
     

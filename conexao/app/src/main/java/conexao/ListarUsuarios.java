@@ -26,6 +26,5 @@ public class ListarUsuarios {
         }catch(Exception e){
             System.out.println("Erro ao listar usuarios: " + e.getMessage());
         }
-    }
     
 }
