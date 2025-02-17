@@ -16,7 +16,7 @@ public class CriarTabela {
         String sql = "CREATE TABLE IF NOT EXISTS usuarios ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "nome TEXT NOT NULL,"
-                + "email TEXT NOR NULL)";
+                + "email TEXT NOT NULL)";
         
         try(Statement stmt = conexao.createStatement()){
             stmt.execute(sql);

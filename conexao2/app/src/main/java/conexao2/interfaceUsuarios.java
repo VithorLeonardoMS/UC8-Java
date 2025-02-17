@@ -4,7 +4,11 @@
  */
 package conexao2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 /**
@@ -20,7 +24,44 @@ public class interfaceUsuarios extends javax.swing.JFrame {
      */
     public interfaceUsuarios() {
         initComponents();
+        botaoDeletar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    Integer.parseInt(inserirID.getText());
+                } catch(NumberFormatException eB){
+                    JOptionPane.showMessageDialog(null, "Para deletar um usuario é nescesário indicar o id respectivo!");
+                }
+                String sql = "DELETE FROM usuarios WHERE id = ?";
+         
+                try(PreparedStatement pstmt = conexao.prepareStatement(sql)){
+                    pstmt.setInt(1,Integer.parseInt(inserirID.getText()));
+
+                    int rowsDeleted = pstmt.executeUpdate();
+                    if(rowsDeleted > 0){
+                        System.out.println("Usuario deletado com sucesso! ");
+                        JOptionPane.showMessageDialog(null, "Usuario deletado com sucesso");
+                        
+                    } else{
+                        System.out.println("Nenhum usuario encontrado com o id fornecido.");
+                    JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado com o id: "+ inserirID.getText());
+                    }
+                } catch(Exception eC){
+                    System.out.println("Erro ao deletar usuario: " + eC.getMessage());
+                }
+                areaDeTexto.setText(ListarUsuarios.listarUsuarios(conexao));
+            }
+        });
         
+        botaoAdd.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(!inserirEmail.getText().contains(" ") ){
+                    InserirUsuario.inserirUsuario(conexao, inserirNome.getText(), inserirEmail.getText());  
+                }
+                
+            }
+        });
         if(conexao != null){
             CriarTabela.criarTabelaUsuarios(conexao);
         }
@@ -108,6 +149,11 @@ public class interfaceUsuarios extends javax.swing.JFrame {
         });
 
         botaoDeletar.setText("Deletar");
+        botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDeletarActionPerformed(evt);
+            }
+        });
 
         areaDeTexto.setColumns(20);
         areaDeTexto.setRows(5);
@@ -119,18 +165,21 @@ public class interfaceUsuarios extends javax.swing.JFrame {
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
-                        .addComponent(botaoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inserirEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inserirNome, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inserirID, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(inserirID, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inserirEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inserirNome, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
+                                .addComponent(botaoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 101, Short.MAX_VALUE)))
+                .addGap(677, 677, 677))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,8 +193,8 @@ public class interfaceUsuarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoAlterar)
-                    .addComponent(botaoDeletar))
+                    .addComponent(botaoDeletar)
+                    .addComponent(botaoAlterar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(79, Short.MAX_VALUE))
@@ -156,32 +205,36 @@ public class interfaceUsuarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(392, 392, 392)
                 .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddActionPerformed
-        InserirUsuario.inserirUsuario(conexao, inserirNome.getText(), inserirEmail.getText());
+
         areaDeTexto.setText(ListarUsuarios.listarUsuarios(conexao));
     }//GEN-LAST:event_botaoAddActionPerformed
 
     private void botaoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAlterarActionPerformed
-        // TODO add your handling code here:
+        if(!inserirID.getText().equals("")){
+            
+        }
+        areaDeTexto.setText(ListarUsuarios.listarUsuarios(conexao));
     }//GEN-LAST:event_botaoAlterarActionPerformed
 
+    
     private void inserirNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirNomeActionPerformed
-        // TODO add your handling code here:
+        areaDeTexto.setText(ListarUsuarios.listarUsuarios(conexao));
     }//GEN-LAST:event_inserirNomeActionPerformed
 
     private void inserirEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirEmailActionPerformed
@@ -224,6 +277,11 @@ public class interfaceUsuarios extends javax.swing.JFrame {
             inserirEmail.setText("Insira o email");
         }
     }//GEN-LAST:event_inserirEmailFocusLost
+
+    private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeletarActionPerformed
+        
+        
+    }//GEN-LAST:event_botaoDeletarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@ package conexao2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,7 @@ public class InserirUsuario {
             pstmt.setString(2, email);
             pstmt.executeUpdate();
             System.out.println("Usuario inserido com sucesso!");
-            
+            JOptionPane.showMessageDialog(null, "Usuario inserido com sucesso! ");
         } catch(Exception e){
             System.out.println("Erro ao inserir usuario: " + e.getMessage());
         }
