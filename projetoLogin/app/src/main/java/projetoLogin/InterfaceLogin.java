@@ -39,6 +39,12 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        textFieldSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldSenhaActionPerformed(evt);
+            }
+        });
+
         botaoLogin.setText("Logar");
         botaoLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +131,10 @@ public class InterfaceLogin extends javax.swing.JFrame {
         }
         conexaoSQLite.desconectar(conexao);
     }//GEN-LAST:event_botaoCadastrarActionPerformed
+
+    private void textFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldSenhaActionPerformed
 
     /**
      * @param args the command line arguments

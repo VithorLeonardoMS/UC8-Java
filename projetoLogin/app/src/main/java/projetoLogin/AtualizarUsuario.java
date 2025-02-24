@@ -12,12 +12,12 @@ import java.sql.PreparedStatement;
  * @author VITHORLEONARDOMELLOS
  */
 public class AtualizarUsuario {
-    public static void atualizarUsuario(Connection conexao, int id, String novoNome, String novoEmail){
-        String sql = "UPDATE usuarios SET nome = ?, email = ? WHERE id = ?";
+    public static void atualizarUsuario(Connection conexao, int id, String novoNome, String novaSenha){
+        String sql = "UPDATE usuarios SET nome = ?, senha = ? WHERE id = ?";
         
         try(PreparedStatement pstmt = conexao.prepareStatement(sql)){
             pstmt.setString(1,novoNome);
-            pstmt.setString(2,novoEmail);
+            pstmt.setString(2,novaSenha);
             pstmt.setInt(3,id);
             
             int rowsUpdated = pstmt.executeUpdate();
@@ -25,7 +25,7 @@ public class AtualizarUsuario {
             if(rowsUpdated > 0){
                 System.out.println("Usuario atualizado com sucesso!");
             } else{
-                System.out.println("Nenhum ususario encontrado com ID fornecido.");
+                System.out.println("Nenhum usuario encontrado com ID fornecido.");
             }
         } catch(Exception e){
             System.out.println("Erro ao atualizar usuario: " + e.getMessage());

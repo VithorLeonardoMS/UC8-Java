@@ -4,23 +4,41 @@
  */
 package projetoLogin;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.font.TextAttribute;
+import java.sql.Connection;
+import java.util.Map;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author VITHORLEONARDOMELLOS
  */
 public class TelaUsuario extends javax.swing.JFrame {
-
+    ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
+    Connection conexao = conexaoSQLite.conectar();
     String nome;
     String senha;
-    
+    int id;
     /**
      * Creates new form TelaUsuario
      */
     public TelaUsuario(String nome, String senha) {
         initComponents();
+        botaoReestabelecer.setContentAreaFilled(false); // Remove o fundo do botão
+        botaoReestabelecer.setBorderPainted(false); // Remove a borda do botão
+        botaoReestabelecer.setFocusPainted(false); // Remove o contorno ao ser clicado
+        botaoReestabelecer.setOpaque(false); // Garante que o fundo não seja preenchido
         this.senha = senha;
         this.nome = nome;
-                
+        campoNome.setText(nome);
+        campoSenha.setText(senha);
+        Font font = botaoReestabelecer.getFont();
+        Map<TextAttribute, Object> atributos = (Map<TextAttribute, Object>) font.getAttributes();
+        atributos.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        botaoReestabelecer.setFont(font.deriveFont(atributos));
+        this.id = PegarUsuario.pegarId(conexao,nome);
     }
 
     /**
@@ -32,38 +50,138 @@ public class TelaUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        campoNome = new javax.swing.JTextField();
+        campoSenha = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        botaoAtualizar = new javax.swing.JButton();
+        botaoDeletar = new javax.swing.JButton();
+        botaoReestabelecer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField1.setText("jTextField1");
+        campoSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoSenhaActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
+        jLabel1.setText("Seu nome");
+
+        jLabel2.setText("Sua senha");
+
+        botaoAtualizar.setText("Atualizar");
+        botaoAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAtualizarActionPerformed(evt);
+            }
+        });
+
+        botaoDeletar.setText("Excluir usuario");
+        botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDeletarActionPerformed(evt);
+            }
+        });
+
+        botaoReestabelecer.setText("Reestabelecer");
+        botaoReestabelecer.setBorder(null);
+        botaoReestabelecer.setBorderPainted(false);
+        botaoReestabelecer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botaoReestabelecerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botaoReestabelecerMouseExited(evt);
+            }
+        });
+        botaoReestabelecer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoReestabelecerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(154, 154, 154))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(campoNome, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(campoSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(botaoReestabelecer)
+                                .addComponent(botaoAtualizar))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(botaoDeletar))))
+                .addGap(114, 114, 114))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoAtualizar)
+                    .addComponent(botaoDeletar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoReestabelecer)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoSenhaActionPerformed
+
+    private void botaoReestabelecerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoReestabelecerMouseEntered
+        botaoReestabelecer.setForeground(Color.blue);
+    }//GEN-LAST:event_botaoReestabelecerMouseEntered
+
+    private void botaoReestabelecerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoReestabelecerMouseExited
+        botaoReestabelecer.setForeground(Color.black);
+    }//GEN-LAST:event_botaoReestabelecerMouseExited
+
+    private void botaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarActionPerformed
+
+        if(!campoNome.getText().equals("") && !campoSenha.getText().equals("") && !(campoSenha.getText().equals(senha) && campoNome.getText().equals(nome) )){
+           try{
+                AtualizarUsuario.atualizarUsuario(conexao, id, nome, nome);
+                nome = campoNome.getText();
+                senha = campoSenha.getText();
+                JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso!");
+           } catch(Exception e){
+               System.out.println("Erro em botaoAtualizar: " + e.getMessage());
+               JOptionPane.showMessageDialog(this, "Ocorreu um erro ao atualizar usuario", "Usuario não foi atualizado.",JOptionPane.ERROR_MESSAGE);
+           }
+        } else{
+            JOptionPane.showMessageDialog(this, "Verifique os campos e tente novamente!", "Usuario não foi atualizado.",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botaoAtualizarActionPerformed
+
+    private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeletarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoDeletarActionPerformed
+
+    private void botaoReestabelecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReestabelecerActionPerformed
+        campoNome.setText(nome);
+        campoSenha.setText(senha);
+    }//GEN-LAST:event_botaoReestabelecerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,13 +213,18 @@ public class TelaUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaUsuario("senha","senha").setVisible(true);
+                new TelaUsuario("nome","senha").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton botaoAtualizar;
+    private javax.swing.JButton botaoDeletar;
+    private javax.swing.JButton botaoReestabelecer;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoSenha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
