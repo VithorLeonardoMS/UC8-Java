@@ -39,6 +39,11 @@ public class TelaUsuario extends javax.swing.JFrame {
         atributos.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         botaoReestabelecer.setFont(font.deriveFont(atributos));
         this.id = PegarUsuario.pegarId(conexao,nome);
+        if(id == -1){
+            System.out.println("ERRO pegarID() não encontrou o id pelo nome - retornou -1 para ("+nome+")");
+        }
+        System.out.println( "ID: " + id + "\nNome: " + nome + "\n Senha: " + senha);
+        
     }
 
     /**
@@ -161,7 +166,7 @@ public class TelaUsuario extends javax.swing.JFrame {
 
         if(!campoNome.getText().equals("") && !campoSenha.getText().equals("") && !(campoSenha.getText().equals(senha) && campoNome.getText().equals(nome) )){
            try{
-                AtualizarUsuario.atualizarUsuario(conexao, id, nome, nome);
+                AtualizarUsuario.atualizarUsuario(conexao, id, nome, senha);
                 nome = campoNome.getText();
                 senha = campoSenha.getText();
                 JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso!");
@@ -175,7 +180,10 @@ public class TelaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoAtualizarActionPerformed
 
     private void botaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeletarActionPerformed
-        // TODO add your handling code here:
+        DeletarUsuario.deletarUsuario(conexao,id);
+        new InterfaceLogin().setVisible(true);
+        this.dispose(); //fecha a tela de loginssageDialog(null, "Usuario deletado com sucesso!");
+        
     }//GEN-LAST:event_botaoDeletarActionPerformed
 
     private void botaoReestabelecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReestabelecerActionPerformed
