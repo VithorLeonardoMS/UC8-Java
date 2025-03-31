@@ -11,8 +11,11 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="telaPrincipal">
           <Properties>
-            <Property name="text" type="java.lang.String" value="File"/>
+            <Property name="text" type="java.lang.String" value="In&#xed;cio"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="telaPrincipalMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="produtos">
           <Properties>

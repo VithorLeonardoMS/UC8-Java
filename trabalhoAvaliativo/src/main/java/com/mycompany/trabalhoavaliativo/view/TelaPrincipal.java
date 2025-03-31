@@ -48,6 +48,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     
+    public void fechar(){
+        this.dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,7 +71,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        telaPrincipal.setText("File");
+        telaPrincipal.setText("Início");
+        telaPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                telaPrincipalMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(telaPrincipal);
 
         produtos.setText("Produtos");
@@ -103,6 +112,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mostrarTela("CadastrarProduto");
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
 
+    private void telaPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telaPrincipalMouseClicked
+        mostrarTela("PainelInicial");
+    }//GEN-LAST:event_telaPrincipalMouseClicked
+
+    
+    
     public void mostrarTela(String nomeTela) {
         cardLayout.show(painelPrincipal, nomeTela);
         painelPrincipal.revalidate();

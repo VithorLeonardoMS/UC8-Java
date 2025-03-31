@@ -33,6 +33,11 @@ public class TelaLogin extends javax.swing.JFrame {
         atributos.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         botaoRegistrar.setFont(font.deriveFont(atributos));
     }
+    
+    public void trocarDeTela(TelaPrincipal telaPrincipal){
+        this.setVisible(true);
+        telaPrincipal.fechar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

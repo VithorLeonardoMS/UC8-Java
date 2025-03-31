@@ -4,6 +4,8 @@
  */
 package com.mycompany.trabalhoavaliativo.view;
 
+import com.mycompany.trabalhoavaliativo.controller.Main;
+
 /**
  *
  * @author VITHORLEONARDOMELLOS
@@ -19,6 +21,8 @@ public class PainelInicial extends javax.swing.JPanel {
         initComponents();
         this.nomeDoUsuario = nomeDoUsuario;
         txtBemVindo.setText("Bem vindo <" + nomeDoUsuario + ">");
+        this.nomeDoUsuario = nomeDoUsuario;
+        this.telaPrincipal = telaPrincipal;
     }
 
     /**
@@ -69,9 +73,8 @@ public class PainelInicial extends javax.swing.JPanel {
 
     private void botaoLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLogoutActionPerformed
         // TODO add your handling code here:
-       
-        new TelaLogin().setVisible(true);
-        telaPrincipal.dispose();
+        Main.reiniciar(telaPrincipal);
+        
     }//GEN-LAST:event_botaoLogoutActionPerformed
 
 
