@@ -24,6 +24,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     private JPanel painelPrincipal;
     private CardLayout cardLayout;
+    private ListarProdutos listarProdutos = new ListarProdutos(this);
     
     public TelaPrincipal(String usuario) {
         initComponents();
@@ -37,6 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         painelPrincipal.add(new CadastrarProduto(this), "CadastrarProduto");
         painelPrincipal.add(new PainelInicial(this, usuario),"PainelInicial");
+        painelPrincipal.add(listarProdutos, "ListarProdutos");
         
         getContentPane().add(painelPrincipal, java.awt.BorderLayout.CENTER);
         setPreferredSize(new Dimension(400, 300));
@@ -64,8 +66,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         telaPrincipal = new javax.swing.JMenu();
-        produtos = new javax.swing.JMenu();
+        verProdutos = new javax.swing.JMenu();
         cadastrarProduto = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -79,7 +82,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(telaPrincipal);
 
-        produtos.setText("Produtos");
+        verProdutos.setText("Produtos");
 
         cadastrarProduto.setText("cadastrarProduto");
         cadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -87,9 +90,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 cadastrarProdutoActionPerformed(evt);
             }
         });
-        produtos.add(cadastrarProduto);
+        verProdutos.add(cadastrarProduto);
 
-        jMenuBar1.add(produtos);
+        jMenuItem1.setText("verProdutos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        verProdutos.add(jMenuItem1);
+
+        jMenuBar1.add(verProdutos);
 
         setJMenuBar(jMenuBar1);
 
@@ -109,12 +120,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void cadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoActionPerformed
         // TODO add your handling code here:
+        listarProdutos.atualizarTabela();
         mostrarTela("CadastrarProduto");
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
 
     private void telaPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telaPrincipalMouseClicked
         mostrarTela("PainelInicial");
     }//GEN-LAST:event_telaPrincipalMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        mostrarTela("ListarProdutos");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     
     
@@ -161,8 +179,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadastrarProduto;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenu produtos;
     private javax.swing.JMenu telaPrincipal;
+    private javax.swing.JMenu verProdutos;
     // End of variables declaration//GEN-END:variables
 }

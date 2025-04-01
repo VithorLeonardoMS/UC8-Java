@@ -6,13 +6,14 @@ package com.mycompany.trabalhoavaliativo.model;
 
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UsuarioDAO {
     public boolean registrarUsuario(String usuario, String senha) {
         String sql = "INSERT INTO usuarios (usuario, senha) VALUES (?, ?)";
         String senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
 
-        try (Connection conn = Conexao.conectar();
+        try (Connection conn = Conexao.conectarUsuarios();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuario);
             stmt.setString(2, senhaHash);
@@ -27,7 +28,7 @@ public class UsuarioDAO {
     public boolean validarLogin(String usuario, String senha) {
         String sql = "SELECT senha FROM usuarios WHERE usuario = ?";
 
-        try (Connection conn = Conexao.conectar();
+        try (Connection conn = Conexao.conectarUsuarios();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuario);
             ResultSet rs = stmt.executeQuery();
@@ -40,4 +41,6 @@ public class UsuarioDAO {
         }
         return false;
     }
+    
+    
 }

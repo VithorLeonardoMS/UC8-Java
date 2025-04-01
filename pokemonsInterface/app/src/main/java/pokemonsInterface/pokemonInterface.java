@@ -95,6 +95,11 @@ public class pokemonInterface extends javax.swing.JFrame {
 
         botaoTrocar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botaoTrocar.setText("Trocar");
+        botaoTrocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoTrocarActionPerformed(evt);
+            }
+        });
 
         jScrollPane4.setToolTipText("");
 
@@ -219,12 +224,6 @@ public class pokemonInterface extends javax.swing.JFrame {
         });
     }
     
-    private void atualizarMochila(){
-        
-    }
-    
-
-    
     private void botaoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddActionPerformed
             for(int i = 0; i < estoque.size() ; i++){
                 if(estoque.get(i).getPokemonSimples().equals(listEstoque.getSelectedValue())){
@@ -250,6 +249,19 @@ public class pokemonInterface extends javax.swing.JFrame {
         ImageIcon imagemSherk = new ImageIcon(getClass().getResource("shrek.jpg"));
         imagemPrincipal.setIcon(imagemSherk);
     }//GEN-LAST:event_botaoVerShreckActionPerformed
+
+    private void botaoTrocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTrocarActionPerformed
+        // TODO add your handling code here:
+        int indexMl = listMochila.getSelectedIndex();
+        int indexEtq = listEstoque.getSelectedIndex();
+        if( indexMl > -1 &&  indexEtq > -1){
+        
+            listModelMochila.setElementAt(estoque.get(indexEtq).getPokemon(),indexMl);
+            mochila.set(indexMl,estoque.get(indexEtq));
+        }
+        
+        
+    }//GEN-LAST:event_botaoTrocarActionPerformed
 
     /**
      * @param args the command line arguments

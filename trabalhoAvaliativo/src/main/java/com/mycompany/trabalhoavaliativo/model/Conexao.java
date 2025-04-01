@@ -20,27 +20,38 @@ public class Conexao {
     private static final String SENHA = "root";
     private static Connection connection;
 
-    public static Connection conectar() {
+    public static Connection conectarUsuarios() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(URLUsuarios, USUARIO, SENHA);
+                criarTabelaUsuarios();
+            }
+            return connection;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na conexão com o banco de dados de ususarios", e);
+        }
+    }
+    
+    public static Connection conectarProdutos() {
         try {
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URLProdutos, USUARIO, SENHA);
-                criarTabelaUsuarios();
-                connection = DriverManager.getConnection(URLUsuarios, USUARIO,SENHA);
                 criarTabelaProdutos();
             }
             return connection;
         } catch (SQLException e) {
-            throw new RuntimeException("Erro na conexão com o banco de dados", e);
+            throw new RuntimeException("Erro na conexão com o banco de dados de produtos", e);
         }
     }
+    
 
     private static void criarTabelaProdutos() {
         String sql = "CREATE TABLE IF NOT EXISTS produtos (" +
                      "id INT AUTO_INCREMENT PRIMARY KEY, " +
                      "nome VARCHAR(255) NOT NULL, " +
-                     "descricao VARCHAR(255) NOT NULL), " +
+                     "descricao VARCHAR(255) NOT NULL, " +
                      "preco FLOAT NOT NULL, " +
-                     "quantidade INT NOT NULL);";
+                     "quantidade INT NOT NULL)";
         
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
@@ -57,7 +68,8 @@ public class Conexao {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao criar a tabelaprodutos", e);
+            throw new RuntimeException("Erro ao criar a tabela produtos", e);
         }
     }
+    
 }

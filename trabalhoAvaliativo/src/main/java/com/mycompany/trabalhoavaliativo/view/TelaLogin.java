@@ -55,6 +55,7 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoEntrar = new javax.swing.JButton();
         botaoRegistrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        loginTeste = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +94,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Não pussui uma conta?");
 
+        loginTeste.setText("loginTeste");
+        loginTeste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginTesteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,7 +122,9 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(jLabelUsername)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loginTeste)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +138,9 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addComponent(jLabelPassword)
                     .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoEntrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoEntrar)
+                    .addComponent(loginTeste))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoRegistrar)
@@ -177,6 +189,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaoRegistrarActionPerformed
 
+    private void loginTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginTesteActionPerformed
+        // TODO add your handling code here:
+        controller.validarLogin("leo", "123");
+        new TelaPrincipal("leo").setVisible(true);
+            this.dispose(); //fecha a tela de login
+    }//GEN-LAST:event_loginTesteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -221,5 +240,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelUsername;
+    private javax.swing.JButton loginTeste;
     // End of variables declaration//GEN-END:variables
 }

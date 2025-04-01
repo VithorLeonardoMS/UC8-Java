@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -15,22 +16,38 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author VITHORLEONARDOMELLOS
  */
 public class ProdutoDAO {
-    public static boolean registrarProduto(int id, String nome, String descricao, float preco, int quantidade) {
-        String sql = "INSERT INTO produtos (id, nome, descricao, preco, quantidade) VALUES (?, ?)";
+    public static boolean registrarProduto(String nome, String descricao, float preco, int quantidade) {
+        String sql = "INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = Conexao.conectar();
+        try (Connection conn = Conexao.conectarProdutos();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.setString(2, nome);
-            stmt.setString(3, descricao);
-            stmt.setFloat(4, preco);
-            stmt.setInt(5, quantidade);
-            
+            stmt.setString(1, nome);
+            stmt.setString(2, descricao);
+            stmt.setFloat(3, preco);
+            stmt.setInt(4, quantidade);
             stmt.executeUpdate();
+            
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+    
+    public ArrayList<Produto> listarProdutos(){
+        ArrayList<Produto> produtos = new ArrayList<>();
+        
+        String sql = "SELECT * FROM produtos";
+
+        try (Connection conn = Conexao.conectarProdutos();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                produtos.add(new Produto(rs.getInt("id"), rs.getString("nome"),rs.getString("descricao"), rs.getFloat("preco"),rs.getInt("quantidade")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
+        }
 }

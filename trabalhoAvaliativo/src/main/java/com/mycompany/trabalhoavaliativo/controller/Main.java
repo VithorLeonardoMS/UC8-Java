@@ -4,6 +4,7 @@
  */
 package com.mycompany.trabalhoavaliativo.controller;
 
+import com.mycompany.trabalhoavaliativo.model.ProdutoDAO;
 import com.mycompany.trabalhoavaliativo.view.TelaLogin;
 import com.mycompany.trabalhoavaliativo.view.TelaPrincipal;
 
@@ -42,7 +43,7 @@ public class Main {
         }
         //</editor-fold>
         //</editor-fold>
-
+        new ProdutoDAO().listarProdutos();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
