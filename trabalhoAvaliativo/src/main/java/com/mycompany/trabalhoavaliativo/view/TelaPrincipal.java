@@ -41,7 +41,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelPrincipal.add(listarProdutos, "ListarProdutos");
         
         getContentPane().add(painelPrincipal, java.awt.BorderLayout.CENTER);
-        setPreferredSize(new Dimension(400, 300));
+        setPreferredSize(new Dimension(550, 300));
         
         mostrarTela("PainelInicial");
         
@@ -93,6 +93,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         verProdutos.add(cadastrarProduto);
 
         jMenuItem1.setText("verProdutos");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem1MouseClicked(evt);
+            }
+        });
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -130,9 +135,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
+        listarProdutos.atualizarTabela();
         mostrarTela("ListarProdutos");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
+        // TODO add your handling code here:
+        listarProdutos.atualizarTabela();
+    }//GEN-LAST:event_jMenuItem1MouseClicked
 
     
     

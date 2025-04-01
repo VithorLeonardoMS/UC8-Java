@@ -22,6 +22,10 @@ public class Produto {
         this.preco = preco;
         this.quantidade = quantidade;
     }
+    
+    public void atualizar(String nomeDaColuna, String valor){
+        ProdutoDAO.atualizarProduto(this.id,nomeDaColuna, valor);
+    }
 
     public int getId() {
         return id;
@@ -57,5 +61,9 @@ public class Produto {
 
     public void setPreco(float preco) {
         this.preco = preco;
+    }
+    
+    public void deletar(){
+        ProdutoDAO.deletarProduto(id);
     }
 }

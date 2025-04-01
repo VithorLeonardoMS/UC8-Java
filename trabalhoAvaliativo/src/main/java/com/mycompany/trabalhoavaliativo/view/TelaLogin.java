@@ -181,7 +181,7 @@ public class TelaLogin extends javax.swing.JFrame {
         String usuarios = campoNome.getText().trim();
         String senha = new String(campoSenha.getPassword()).trim();
 
-        if (controller.registrarUsuario(usuarios, senha)) {
+        if (!usuarios.trim().equals("") && !usuarios.trim().equals("") && controller.registrarUsuario(usuarios, senha)) {
             JOptionPane.showMessageDialog(this, "Usuario cadastrado com sucesso!");
         } else {
             JOptionPane.showMessageDialog(this, "Usuario ou senhas incorretos");

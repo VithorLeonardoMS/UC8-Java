@@ -4,6 +4,7 @@ com\mycompany\trabalhoavaliativo\view\TelaPrincipal$1.class
 com\mycompany\trabalhoavaliativo\view\TelaPrincipal$4.class
 com\mycompany\trabalhoavaliativo\model\ProdutoDAO.class
 com\mycompany\trabalhoavaliativo\model\UsuarioDAO.class
+com\mycompany\trabalhoavaliativo\view\ListarProdutos$4.class
 com\mycompany\trabalhoavaliativo\view\TelaPrincipal$3.class
 com\mycompany\trabalhoavaliativo\controller\Main.class
 com\mycompany\trabalhoavaliativo\view\CadastrarProduto$1.class
@@ -19,10 +20,12 @@ com\mycompany\trabalhoavaliativo\view\PainelInicial.class
 com\mycompany\trabalhoavaliativo\model\Usuario.class
 com\mycompany\trabalhoavaliativo\view\TelaLogin$6.class
 com\mycompany\trabalhoavaliativo\view\ListarProdutos.class
+com\mycompany\trabalhoavaliativo\view\TelaPrincipal$5.class
 com\mycompany\trabalhoavaliativo\view\CadastrarProduto.class
 com\mycompany\trabalhoavaliativo\view\TelaLogin$1.class
 com\mycompany\trabalhoavaliativo\controller\ProdutoCrontroller.class
 com\mycompany\trabalhoavaliativo\model\Produto.class
+com\mycompany\trabalhoavaliativo\view\ListarProdutos$3.class
 com\mycompany\trabalhoavaliativo\view\CadastrarProduto$2.class
 com\mycompany\trabalhoavaliativo\view\ListarProdutos$1.class
 com\mycompany\trabalhoavaliativo\view\TelaPrincipal$2.class

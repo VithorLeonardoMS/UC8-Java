@@ -4,13 +4,19 @@
  */
 package com.mycompany.trabalhoavaliativo.view;
 
+import com.mycompany.trabalhoavaliativo.model.Produto;
 import com.mycompany.trabalhoavaliativo.model.ProdutoDAO;
 import com.mycompany.trabalhoavaliativo.model.UsuarioDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,9 +43,20 @@ public class ListarProdutos extends javax.swing.JPanel {
         });
         
         JPopupMenu popupMenu = new JPopupMenu();
-        JMenuItem editarItem = new JMenuItem("Editar");
         JMenuItem excluirItem = new JMenuItem("Excluir");
-        popupMenu.add(editarItem);
+        
+        
+        excluirItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int linhaSelecionada =tabela.getSelectedRow();
+                    if(linhaSelecionada > -1){
+                        Produto produtoSelecionado = (Produto) tabela.getValueAt(linhaSelecionada, 5);
+                        produtoSelecionado.deletar();
+                        atualizarTabela();
+                    }
+                }
+            });
         popupMenu.add(excluirItem);
 
         // Adicionando evento de clique na tabela
@@ -52,6 +69,23 @@ public class ListarProdutos extends javax.swing.JPanel {
                     
                     // Exibe o menu na posição do clique
                     popupMenu.show(tabela, e.getX(), e.getY());
+                }
+            }
+        });
+        
+         modelo.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int linha = e.getFirstRow();
+                    int coluna = e.getColumn();
+                    
+                    String novoValor = String.valueOf(modelo.getValueAt(linha, coluna));
+                    Produto produtoSelecionado = (Produto) modelo.getValueAt(linha, 5);
+                    produtoSelecionado.atualizar(tabela.getColumnName(coluna),novoValor);
+                    atualizarTabela();
+                        
+                    // Aqui você pode salvar a alteração no banco de dados, se necessário
                 }
             }
         });
@@ -101,11 +135,11 @@ public class ListarProdutos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "nome", "descricao", "quantidade", "preco", "Produto"
+                "ID", "nome", "descricao", "preco", "quantidade", "Produto"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 true, true, true, true, true, false
@@ -129,12 +163,14 @@ public class ListarProdutos extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 57, Short.MAX_VALUE)
+                .addGap(0, 59, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
